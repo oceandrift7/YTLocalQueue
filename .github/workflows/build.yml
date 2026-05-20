@@ -5,31 +5,34 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  THEOS: ${{ github.workspace }}/theos
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Theos dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git curl make
+
       - name: Install Theos
         run: |
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
-        env:
-          THEOS: ${{ github.workspace }}/theos
+          git clone --recursive https://github.com/theos/theos.git $THEOS
 
       - name: Get YouTube Headers
         run: |
           git clone https://github.com/theos/headers.git $THEOS/include
-        env:
-          THEOS: ${{ github.workspace }}/theos
 
       - name: Build
         run: |
           make package THEOS_PACKAGE_SCHEME=rootless
-        env:
-          THEOS: ${{ github.workspace }}/theos
 
-      - name: Upload dylib
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: YTLocalQueue-dylib
