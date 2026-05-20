@@ -18,15 +18,18 @@ jobs:
       - name: Install Theos dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git curl make
+          sudo apt-get install -y git curl make perl unzip
 
       - name: Install Theos
         run: |
           git clone --recursive https://github.com/theos/theos.git $THEOS
+          echo "Theos cloned successfully"
+          ls $THEOS
 
       - name: Get YouTube Headers
         run: |
           git clone https://github.com/theos/headers.git $THEOS/include
+          echo "Headers cloned"
 
       - name: Build
         run: |
