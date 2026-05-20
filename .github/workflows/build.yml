@@ -18,7 +18,8 @@ jobs:
       - name: Install Theos dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git curl make perl unzip xz-utils libtinfo5
+          sudo apt-get install -y git curl make perl unzip xz-utils libtinfo6
+          sudo ln -s /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/libtinfo.so.5
 
       - name: Install Theos
         run: |
