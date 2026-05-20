@@ -26,7 +26,7 @@ jobs:
 
       - name: Download iOS SDK
         run: |
-          curl -L https://github.com/theos/sdks/releases/download/master-146e41f/iPhoneOS16.5.sdk.tar.xz -o sdk.tar.xz
+          curl -L https://github.com/theos/sdks/releases/download/master-146e41f/iPhoneOS13.7.sdk.tar.xz -o sdk.tar.xz
           mkdir -p $THEOS/sdks
           tar -xf sdk.tar.xz -C $THEOS/sdks
 
@@ -38,7 +38,7 @@ jobs:
 
       - name: Build
         run: |
-          make package THEOS_PACKAGE_SCHEME=rootless
+          make package THEOS_PACKAGE_SCHEME=rootless TARGET_OS_DEPLOYMENT_VERSION=13.0
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
