@@ -38,7 +38,7 @@ jobs:
 
       - name: Get YouTube Headers
         run: |
-          git clone https://github.com/theos/headers.git ${{ github.workspace }}/Headers/YouTubeHeader
+          git clone https://github.com/PoomSmart/YouTubeHeader.git ${{ github.workspace }}/Headers/YouTubeHeader
 
       - name: Build
         run: |
