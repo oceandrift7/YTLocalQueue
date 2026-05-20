@@ -30,6 +30,12 @@ jobs:
           mkdir -p $THEOS/sdks
           tar -xf sdk.tar.xz -C $THEOS/sdks
 
+      - name: Download iOS Toolchain
+        run: |
+          curl -L https://github.com/sbingner/llvm-project/releases/download/v10.0.0-1/linux-ios-arm64e-clang-toolchain.tar.lzma -o toolchain.tar.lzma
+          mkdir -p $THEOS/toolchain/linux/iphone
+          tar -xf toolchain.tar.lzma --strip-components=1 -C $THEOS/toolchain/linux/iphone
+
       - name: Build
         run: |
           make package THEOS_PACKAGE_SCHEME=rootless
