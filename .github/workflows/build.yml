@@ -36,6 +36,10 @@ jobs:
           mkdir -p $THEOS/toolchain/linux/iphone
           tar -xf toolchain.tar.lzma --strip-components=1 -C $THEOS/toolchain/linux/iphone
 
+      - name: Get YouTube Headers
+        run: |
+          git clone https://github.com/theos/headers.git ${{ github.workspace }}/Headers/YouTubeHeader
+
       - name: Build
         run: |
           make package THEOS_PACKAGE_SCHEME=rootless SYSROOT=$THEOS/sdks/iPhoneOS13.7.sdk TARGET=iphone:13.0:13.0
